@@ -1,27 +1,29 @@
-# Ex.No: 6 HOLT WINTERS METHOD
+# Ex.No: 06 HOLT WINTERS METHOD
 
-## Date: 21 - 11 - 2026
+### Date: 21 - 11 - 2026
 
-# AIM
-To implement Holt-Winters Exponential Smoothing for time series analysis, evaluate forecasting accuracy, and predict future temperatures using historical data.
+# AIM:
+To implement Holt-Winters Exponential Smoothing for time series analysis, evaluate forecasting accuracy, and predict future temperatures using historical daily observation data.
 
-# ALGORITHM
+# DATASET:
+- **Dataset Name**: Daily Minimum Temperatures in Melbourne
+- **Filename**: `daily-min-temperatures.csv`
+- **Domain**: Climatological Time Series
+- **Periodicity**: 365 days (annual seasonality)
+- **Sample Span**: 10 years of daily temperature observations (1981–1990)
 
-1. You import the necessary libraries
-2. You load a CSV file containing daily sales data into a DataFrame, parse the 'date' column as
-datetime, and perform some initial data exploration
-3. You group the data by date and resample it to a monthly frequency (beginning of the month
-4. You plot the time series data
-5. You import the necessary 'statsmodels' libraries for time series analysis
-6. You decompose the time series data into its additive components and plot them:
-7. You calculate the root mean squared error (RMSE) to evaluate the model's performance
-8. You calculate the mean and standard deviation of the entire sales dataset, then fit a Holt-
-Winters model to the entire dataset and make future predictions
-9. You plot the original sales data and the predictions
+# ALGORITHM:
+1. Import the necessary libraries (pandas, numpy, matplotlib, statsmodels, scikit-learn).
+2. Load the Daily Minimum Temperatures dataset, parse datetime indexing, set daily frequency (`asfreq('D')`), and interpolate missing values linearly.
+3. Perform additive seasonal decomposition (`period=365`) to verify annual cyclical patterns.
+4. Scale data using `MinMaxScaler` with a +1 positive offset to accommodate multiplicative seasonal formulation constraints.
+5. Split data into training (75%) and testing (25%) partitions.
+6. Initialize and fit the Holt-Winters model using `ExponentialSmoothing` with additive trend (`trend='add'`) and multiplicative seasonality (`seasonal='mul'`, `seasonal_periods=365`).
+7. Forecast temperature across the test set, inverse-transform to original Celsius scale, and evaluate accuracy metrics (MAE, MSE, RMSE).
+8. Refit the model on the complete 10-year dataset and forecast daily minimum temperatures 365 days into the future.
+9. Plot the historical time series alongside the out-of-sample future forecast.
 
-
-# PROGRAM
-
+# PROGRAM:
 ```python
 import pandas as pd
 import numpy as np
@@ -168,24 +170,22 @@ plt.legend()
 plt.show()
 ```
 
-# OUTPUT
+# OUTPUT:
 
-## Scaled Data Plot
+### Scaled Data Plot
 <img width="567" height="455" alt="image" src="https://github.com/user-attachments/assets/ed7c0783-5f64-48a8-a312-66e730f2d298" />
 
-## Decomposed Plot
+### Decomposed Plot
 <img width="630" height="470" alt="image" src="https://github.com/user-attachments/assets/1a3c963e-817e-428f-96b0-e650ceffef0a" />
 
-## Test Prediction
+### Test Prediction
 <img width="562" height="455" alt="image" src="https://github.com/user-attachments/assets/67755a87-0969-4566-982d-c0152dba15cc" />
 
-## Model Performance Metrics
+### Model Performance Metrics
 <img width="330" height="94" alt="{4D9726BC-56D4-4ED6-8D41-9674FEE3A0C2}" src="https://github.com/user-attachments/assets/9f2c4444-b00d-4518-84f3-90ddca6ac1c2" />
 
-
-## Final Prediction
+### Final Prediction
 <img width="996" height="547" alt="image" src="https://github.com/user-attachments/assets/0f6d8208-d604-4321-9cd8-1adc8f827d66" />
 
-
-# RESULT
-Thus the program run successfully based on the Holt Winters Method model.
+# RESULT:
+Thus, the Python program for time series forecasting using the Holt-Winters Method has been executed successfully.
